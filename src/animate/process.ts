@@ -18,8 +18,9 @@ export class Tween {
     // }
 }
 export function easeOut(type, t, b, c, d) {
-    let x = -c * (t /= d) * (t - 2) * type + b;
-    console.log("返回距离2", -c * (t /= d) * (t - 2) * type, x);
+    let x = -c * (t /= d) * (t - 2) + b;
+    console.log(-c * (t /= d) * (t - 2),".....");
+    
     return x;
 }
 // export function easeOutLeft(t, b, c, d) {

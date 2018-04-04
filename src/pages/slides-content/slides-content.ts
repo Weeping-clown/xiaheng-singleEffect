@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { NavController, NavParams, IonicPage, Content, Slides } from 'ionic-angular';
+import { NavController, NavParams, IonicPage, Content, Slides, Refresher } from 'ionic-angular';
 import { HttpService } from '@ngapp/core';
 import { Tween, easeOut } from './../../animate/process';
 
@@ -85,69 +85,45 @@ export class SlidesContentPage {
   resetTab() {
     let ele = this.tabBox.nativeElement;
     let parent = ele.offsetParent;
-    // console.log(left);
-
-    // let left = this.tabIndex * 75 + 4 - this.translateX;
-    // if (left > (this.screenWidth - 75)) {
-    //   this.translateX = (this.tabIndex + 1) * 75 + 4 - this.screenWidth;
-    //   ele.style.transform = `translateX(-${this.translateX}px)`;
-    //   // ele.style.left = `-${this.translateX}px`;
-    //   setTimeout(() => {
-    //     parent.scrollLeft = this.translateX;
-    //     ele.style.transform = `translateX(0px)`;
-    //   }, 1000);
-    // }
-    // if (left < 0) {
-    //   this.translateX = (this.tabIndex + 1) * 75 - 4;
-    //   ele.style.transform = `translateX(-${this.translateX}px)`;
-    //   // ele.style.left = `-${this.translateX}px`;
-    //   setTimeout(() => {
-    //     parent.scrollLeft = this.translateX;
-    //     ele.style.transform = `translateX(0px)`;
-    //   }, 1000);
-    // }
 
     let scrollLeft = parent.scrollLeft;
     let left = this.tabIndex * 75 - scrollLeft;
-    console.log(left, this.screenWidth - 75);
+    let right = this.screenWidth - ((this.tabIndex + 1) * 75 - scrollLeft);
 
-    if (left >= (this.screenWidth - 75)) {
+    if (right <= 75) {
       // parent.scrollLeft = (this.tabIndex + 2) * 75 - this.screenWidth;
-      let width = (this.tabIndex + 2) * 75 - this.screenWidth;
-      this.slideScrollThree(1, parent, width);
+      let endP = (this.tabIndex + 2) * 75 - this.screenWidth;
+      this.slideScrollThree(1, parent, endP);
     }
-    if (left <= 0) {
+    if (left <= 75) {
       // parent.scrollLeft = (this.tabIndex - 1) * 75;
-      let width = (this.tabIndex - 1) * 75;
-      this.slideScrollThree(-1, parent, width);
+      let endP = (this.tabIndex - 1) * 75;
+      this.slideScrollThree(-1, parent, endP);
     }
   }
 
-  slideScrollThree(type, target, distance) {
-    console.log("初始信息", 0, target.scrollLeft, distance, 50);
+  // 只需要控制起始和结束位置
+  slideScrollThree(type, target, end) {
+    console.log("初始信息", 0, target.scrollLeft, end, 50);
     let t = 0;
     let b = target.scrollLeft;
-    let c = distance;
-    let d = 50;
-    // this.run(target, 0, target.scrollLeft, distance, 50);
+    let c = end - target.scrollLeft;
+    let d = 30;
 
     let timer = setInterval(() => {
       target.scrollLeft = Math.ceil(this.easeOut(type, t, b, c, d));
       t++;
       if (type > 0) {
-        if (t >= d || target.scrollLeft >= distance) {
-          target.scrollLeft = distance;
+        if (t >= d || target.scrollLeft >= end) {
+          target.scrollLeft = end;
           clearInterval(timer);
         }
       } else {
-        console.log(target.scrollLeft,distance);
-        
-        if (t >= d || target.scrollLeft <= distance) {
-          target.scrollLeft = distance;
+        if (t >= d || target.scrollLeft <= end) {
+          target.scrollLeft = end;
           clearInterval(timer);
         }
       }
-      console.log(target.scrollLeft);
     }, 10);
   }
 
