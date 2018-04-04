@@ -1,0 +1,7 @@
+<div class="box">
+  <!-- <img src="img/loading.gif" alt="" *ngIf="!loaded"> -->
+  <img class="loading" *ngIf="!loaded" src="assets/imgs/oval.svg" width="50px" alt="" >
+  <img [src]="pic" #img alt="" [@imageShow]="state">
+  <!-- <img [src]="pic" alt="" [@imageShow]="state"  onload="checkState()"> -->
+  <!-- <img [@imageShow]="state" [src]="pic" alt="" #img > -->
+</div>

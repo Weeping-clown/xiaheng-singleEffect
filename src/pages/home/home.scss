@@ -1,0 +1,23 @@
+page-home {
+  .item-ios ion-thumbnail {
+    position: relative;
+    width: 90px;
+    height: 90px;
+  }
+  ul {
+    margin: 0px;
+    padding: 0px;
+    li {
+      height: 40px;
+      line-height: 40px;
+      padding-left: 6px;
+      text-decoration: none;
+      float: left;
+      list-style: none;
+      border-right: 1px solid #a2a2a2;
+      border-bottom: 1px solid #a2a2a2;
+      border-top: 1px solid #a2a2a2;
+      margin-top: -1px;
+    }
+  }
+}

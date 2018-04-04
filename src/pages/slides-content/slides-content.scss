@@ -1,0 +1,53 @@
+page-slides-content {
+  .ng-tabList {
+    padding: 0px;
+    .toolbar-background-ios {
+      background: white;
+    }
+    .tab-list {
+      position: relative;
+      overflow: scroll;
+      transition: 2s;
+      ul {
+        position: relative;
+        display: flex;
+        white-space: nowrap;
+        width: 750px;
+        transition: 1s;
+        li {
+          display: block;
+          width: 65px;
+          list-style-type: none; // width: 60px;
+          padding: 5px 10px;
+          border: 1px solid #488aff;
+          border-radius: 8px;
+          margin-right: 10px;
+          text-align: center;
+          &.active {
+            background: #488aff;
+            color: white;
+          }
+        }
+      }
+    }
+  }
+  loading-images {
+    position: relative;
+    display: block;
+    width: 90px;
+    height: 90px;
+  }
+  .slides {
+    min-height: 100%;
+    height: auto;
+    .swiper-container {
+      overflow: scroll;
+    }
+    .swiper-slide {
+      align-items: start;
+    }
+  }
+  .item-ios ion-avatar img {
+    border-radius: 0px;
+  }
+}
